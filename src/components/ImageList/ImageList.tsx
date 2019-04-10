@@ -11,7 +11,6 @@ import {
 } from 'reactstrap';
 import ImageItem from './Image-item';
 
-import  demoList from '../../api'
 
 interface ImageListProps {
     ImageItemsList: Image[];
@@ -107,8 +106,11 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
     }
 }
 
+
+
+
 const mapStateToProps = (state: any) => ({
-    ImageItemsList: state.image.list,
+    ImageItemsList: state.image.list   
 });
 
 export default connect(mapStateToProps)(ImageList);

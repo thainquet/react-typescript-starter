@@ -21,6 +21,7 @@ class ImageItem extends React.Component<ImageItemProps, {}> {
     }
 
     showImg = () => {
+        // console.log(this.props.)
         this.props.dispatch(showImgAvai())
     }
 
