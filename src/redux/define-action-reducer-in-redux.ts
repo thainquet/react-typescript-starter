@@ -82,7 +82,7 @@ export const ImageReducer = (
             tempList = state.list;
             tempList.push(newImage);
 
-            localStorage.setItem('ImgList', JSON.stringify(tempList));
+            localStorage.setItem('imgList', JSON.stringify(tempList));
             return {
                 ...state,
                 list: tempList || [],
