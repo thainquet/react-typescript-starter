@@ -4,7 +4,6 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import {
     Container
 } from 'reactstrap';
-import Header from './components/Layout/Header';
 import Readme from './components/Readme';
 import TodoList from './components/TodoList';
 
@@ -19,7 +18,6 @@ class App extends React.Component<{}> {
     render() {
         return (
             <div className='page-wrapper'>
-                <Header title='React Starter' />
                 <Container>
                     <Switch>
                         <Route exact path='/' component={TodoList}></Route>

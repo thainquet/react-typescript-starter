@@ -11,6 +11,8 @@ import {
 } from 'reactstrap';
 import ImageItem from './Image-item';
 
+import  demoList from '../../api'
+
 interface ImageListProps {
     ImageItemsList: Image[];
     dispatch: any;
@@ -59,6 +61,7 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
             this.forceUpdate();
         }
     }
+    
 
     componentWillMount() {
         this.props.dispatch(getImage());
@@ -66,7 +69,7 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
 
     render() {
         const { ImageItemsList, dispatch } = this.props;
-        console.log(this.state)
+        console.log(this.props)
         return (
             <div>
                 <Row className='mt-4 mb-4'>
@@ -105,7 +108,8 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
 }
 
 const mapStateToProps = (state: any) => ({
-    ImageItemsList: state.Image.list,
+    ImageItemsList: state.image.list,
 });
 
 export default connect(mapStateToProps)(ImageList);
+

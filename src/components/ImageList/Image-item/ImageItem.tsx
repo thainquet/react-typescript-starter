@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import { addImg, removeImg,  } from '../../../redux/define-action-reducer-in-redux';
+import { addImg, removeImg, showImgAvai,  } from '../../../redux/define-action-reducer-in-redux';
+import store from '../../../redux/create-store'
+
+
+console.log(store.getState())
 
 export interface Image {
     id: string;
@@ -14,18 +18,17 @@ interface ImageItemProps {
 class ImageItem extends React.Component<ImageItemProps, {}> {
     constructor(props: any) {
         super(props);
-
     }
 
-    addImage = () => {
-        this.props.dispatch(addImg(this.props.item.url))
+    showImg = () => {
+        this.props.dispatch(showImgAvai())
     }
 
     render() {
         const { item } = this.props;
         return (
             <li className='Image-list__item'>
-                {item.url}
+                {this.showImg}
             </li>
         );
     }

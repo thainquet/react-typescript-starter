@@ -9,12 +9,15 @@ interface ImageList {
 const initialState: ImageList = {
     list: []
 };
-
+import imgList from '../api'
+localStorage.setItem('imgList',JSON.stringify(imgList))
 /* TYPES */
 const ADD = 'Image/ADD';
 const REMOVE = 'Image/REMOVE';
 const UPDATE = 'Image/UPDATE';
 const GET = 'Image/GET';
+const SHOW_IMG = 'IMG/SHOW';
+const ADD_IMG = 'IMG/ADD';
 
 /* ACTIONS */
 export const getImage = () => {
@@ -34,11 +37,22 @@ export const getImage = () => {
     };
 };
 
+export const showImgAvai = () => {
+    return (dispatch: any) => {
+        const list = JSON.parse(localStorage.getItem('imgList'));
+        console.log(list)
+        dispatch({
+            list,
+            type: ADD_IMG
+        })
+    }
+}
+
 export const addImg = (input: string) => {
     return (dispatch: any) => {
         dispatch({
             url: input,
-            type: ADD,
+            type: ADD_IMG,
         });
     };
 };
@@ -60,7 +74,7 @@ export const ImageReducer = (
     let tempList: Image[];
     let tempCompList: Image[];
     switch (action.type) {
-        case ADD:
+        case ADD_IMG:
             const newImage: Image = {
                 id: generateId(),
                 url: action.url
@@ -68,7 +82,7 @@ export const ImageReducer = (
             tempList = state.list;
             tempList.push(newImage);
 
-            localStorage.setItem('ImageList', JSON.stringify(tempList));
+            localStorage.setItem('ImgList', JSON.stringify(tempList));
             return {
                 ...state,
                 list: tempList || [],
