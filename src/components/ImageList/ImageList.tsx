@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addImg, getImage } from '../../redux/tp.addimg.redux';
+import { addImg, getImage } from '../../redux/define-action-reducer-in-redux';
 import { Image } from './Image-item/ImageItem';
 
 import {
@@ -66,7 +66,7 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
 
     render() {
         const { ImageItemsList, dispatch } = this.props;
-
+        console.log(this.state)
         return (
             <div>
                 <Row className='mt-4 mb-4'>
@@ -105,7 +105,6 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
 }
 
 const mapStateToProps = (state: any) => ({
-    completed: state.Image.completedList,
     ImageItemsList: state.Image.list,
 });
 

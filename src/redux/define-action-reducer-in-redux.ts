@@ -4,12 +4,10 @@ interface Image {
 }
 interface ImageList {
     list: Image[];
-    completedList: Image[];
 }
 
 const initialState: ImageList = {
-    completedList: [],
-    list: [],
+    list: []
 };
 
 /* TYPES */
@@ -58,14 +56,14 @@ export const removeImg = (Image: Image) => {
 
 /* REDUCER */
 export const ImageReducer = (
-    state = initialState, action: { type: string, name: string, list: Image[], Image: Image }) => {
+    state = initialState, action: { type: string, url: string, list: Image[], Image: Image }) => {
     let tempList: Image[];
     let tempCompList: Image[];
     switch (action.type) {
         case ADD:
             const newImage: Image = {
                 id: generateId(),
-                url: action.name
+                url: action.url
             };
             tempList = state.list;
             tempList.push(newImage);
@@ -79,35 +77,6 @@ export const ImageReducer = (
             return {
                 ...state,
                 list: action.list || [],
-            };
-        // case UPDATE:
-        //     tempCompList = state.completedList || [];
-        //     tempList = state.list.filter((Image) => {
-        //         if (Image.id === action.Image.id) {
-        //             Image.status = true;
-        //             tempCompList.push(Image);
-        //         }
-        //         return Image;
-        //     });
-        //     localStorage.setItem('ImageList', JSON.stringify(tempList));
-        //     localStorage.setItem('compList', JSON.stringify(tempCompList));
-        //     return {
-        //         ...state,
-        //         completedList: tempCompList,
-        //         list: tempList,
-        //     };
-        case REMOVE:
-            tempList = state.list.filter((Image) => {
-                return Image.id !== action.Image.id;
-            });
-            tempCompList = state.completedList.filter((Image) => {
-                return Image.id !== action.Image.id;
-            });
-            localStorage.setItem('ImageList', JSON.stringify(tempList));
-            return {
-                ...state,
-                completedList: tempCompList,
-                list: tempList,
             };
         default:
             return state;

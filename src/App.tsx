@@ -9,6 +9,7 @@ import Readme from './components/Readme';
 import TodoList from './components/TodoList';
 
 import './scss/App.scss';
+import ImageList from './components/ImageList/ImageList';
 
 class App extends React.Component<{}> {
     constructor(props: any) {
@@ -23,6 +24,7 @@ class App extends React.Component<{}> {
                     <Switch>
                         <Route exact path='/' component={TodoList}></Route>
                         <Route path='/readme' component={Readme}></Route>
+                        <Route path='/img' component={ImageList}></Route>
                     </Switch>
                 </Container>
             </div>
