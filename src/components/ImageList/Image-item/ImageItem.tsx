@@ -1,10 +1,8 @@
 import * as React from 'react';
 
-import { addImg, removeImg, showImgAvai,  } from '../../../redux/define-action-reducer-in-redux';
+import { getImage, showImgAvai,  } from '../../../redux/define-action-reducer-in-redux';
 import store from '../../../redux/create-store'
 
-
-console.log(store.getState())
 
 export interface Image {
     id: string;
@@ -21,8 +19,7 @@ class ImageItem extends React.Component<ImageItemProps, {}> {
     }
 
     showImg = () => {
-        // console.log(this.props.)
-        this.props.dispatch(showImgAvai())
+        this.props.dispatch(getImage())
     }
 
     render() {

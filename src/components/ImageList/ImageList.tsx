@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addImg, getImage } from '../../redux/define-action-reducer-in-redux';
+import { addImg, getImage, showImgAvai } from '../../redux/define-action-reducer-in-redux';
 import { Image } from './Image-item/ImageItem';
 
 import {
@@ -25,14 +25,12 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            isOpen: true,
             ImageName: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.submitImage = this.submitImage.bind(this);
-        this.displayCompleted = this.displayCompleted.bind(this);
     }
 
     handleChange(e: any) {
@@ -44,11 +42,6 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
         if (e.key === 'Enter') {
             this.submitImage();
         }
-    }
-    displayCompleted() {
-        this.setState({
-            isOpen: !this.state.isOpen,
-        });
     }
 
     submitImage() {
@@ -63,12 +56,11 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
     
 
     componentWillMount() {
-        this.props.dispatch(getImage());
+        this.props.dispatch(showImgAvai());
     }
 
     render() {
         const { ImageItemsList, dispatch } = this.props;
-        console.log(this.props)
         return (
             <div>
                 <Row className='mt-4 mb-4'>
