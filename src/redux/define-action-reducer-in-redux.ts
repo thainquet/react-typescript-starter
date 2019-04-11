@@ -81,15 +81,14 @@ export const ImageReducer = (
                 ...state,
                 list: tempList
             };
-        case QUERY:
-            let oldList: Image[] =  [];            
+        case QUERY:         
             let newList: Image[] = [];
             action.list.forEach((i: any) => {
                 newList.push({ id: i.id, url: i.images.downsized_medium.url})
             });
             return {
                 ...state,
-                list: [...oldList, ...newList]
+                list: [...newList]
             }
         default:
             return state;
