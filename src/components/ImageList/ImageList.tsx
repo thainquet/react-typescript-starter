@@ -57,6 +57,9 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
 
     componentWillMount() {
         this.props.dispatch(showImgAvai());
+        if (localStorage.getItem('list-after-query')) {
+            localStorage.removeItem('list-after-query')
+        }
     }
 
     render() {
