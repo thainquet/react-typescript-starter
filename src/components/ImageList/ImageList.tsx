@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addImg, showImgAvai } from '../../redux/define-action-reducer-in-redux';
+import { addImg, showImgAvai, searchImg } from '../../redux/define-action-reducer-in-redux';
 import { Image } from './Image-item/ImageItem';
 
 import {
@@ -17,7 +17,7 @@ interface ImageListProps {
     dispatch: any;
 }
 interface ImageState {
-    ImageName: string;
+    searchKey: string;
     [key: string]: any;
 }
 
@@ -25,7 +25,7 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            ImageName: '',
+            searchKey: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -45,10 +45,10 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
     }
 
     submitImage() {
-        if (this.state.ImageName.length) {
-            this.props.dispatch(addImg(this.state.ImageName));
+        if (this.state.searchKey.length) {
+            this.props.dispatch(searchImg(this.state.searchKey))
             this.setState({
-                ImageName: '',
+                searchKey: '',
             });
             this.forceUpdate();
         }
@@ -60,15 +60,15 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
     }
 
     render() {
-        const { ImageItemsList, dispatch } = this.props;
+        const { ImageItemsList } = this.props;
         return (
             <div>
                 <Row className='mt-4 mb-4'>
                     <Col sm={10}>
                         <Input
                             className='mb-sm-2'
-                            name='ImageName'
-                            value={this.state.ImageName}
+                            name='searchKey'
+                            value={this.state.searchKey}
                             onChange={this.handleChange}
                             onKeyPress={this.handleKeyPress}
                             autoFocus
@@ -80,7 +80,7 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
                             color='primary'
                             onClick={this.submitImage}
                         >
-                            Add Image
+                            Search Image
                         </Button>
                     </Col>
                 </Row>

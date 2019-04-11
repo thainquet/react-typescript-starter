@@ -11,20 +11,28 @@ const initialState: ImageList = {
 };
 
 
-import imgList from '../api'
-localStorage.setItem('imgList',JSON.stringify(imgList))
+// import imgList from '../api'
+// localStorage.setItem('imgList',JSON.stringify(imgList))
 
 
 import axios from 'axios'
+import ImageList from 'src/components/ImageList/ImageList';
 
 /* TYPES */
 const GET = 'Image/GET';
 const ADD_IMG = 'IMG/ADD';
+const QUERY = 'IMG/API'
 
 /* ACTIONS */
-export const searchImg = () => {
+export const searchImg = (query: string) => {
     return (dispatch: any) => {
-        // axios.post
+        axios.get('https://api.giphy.com/v1/gifs/search'+ '?api_key=eLRMI9GctVULzps6opaxg25yY8ULID5s&q=' + query + '&limit=20')
+        .then(res => {
+            dispatch({
+                list: res.data.data,
+                type: QUERY
+            });
+        })
     }
 }
 
@@ -34,7 +42,7 @@ export const showImgAvai = () => {
         dispatch({
             list,
             type: GET
-        })
+        });
     }
 }
 
@@ -51,7 +59,7 @@ export const addImg = (input: string) => {
 
 /* REDUCER */
 export const ImageReducer = (
-    state = initialState, action: { type: string, url: string, list: Image[], Image: Image }) => {
+    state = initialState, action: { type: string, url: string, list: Array<Image>, Image: Image }) => {
     let tempList: Image[];
     switch (action.type) {
         case ADD_IMG:
@@ -61,7 +69,6 @@ export const ImageReducer = (
             };
             tempList = state.list;
             tempList.push(newImage);
-            console.log("add")
 
             localStorage.setItem('imgList', JSON.stringify(tempList));
             return {
@@ -74,6 +81,16 @@ export const ImageReducer = (
                 ...state,
                 list: tempList
             };
+        case QUERY:
+            let oldList: Image[] =  [];            
+            let newList: Image[] = [];
+            action.list.forEach((i: any) => {
+                newList.push({ id: i.id, url: i.images.downsized_medium.url})
+            });
+            return {
+                ...state,
+                list: [...oldList, ...newList]
+            }
         default:
             return state;
     }
