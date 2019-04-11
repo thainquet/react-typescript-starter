@@ -77,11 +77,16 @@ export const ImageReducer = (
                 ...state,
                 list: tempList
             };
-        case QUERY:         
+        case QUERY:
             let newList: Image[] = [];
             action.list.forEach((i: any) => {
                 newList.push({ id: i.id, url: i.images.downsized_medium.url})
-            });
+            });         
+            /* save result to local storage */
+            tempList = JSON.parse(localStorage.getItem('list-after-query'))
+            tempList = [...newList]
+            localStorage.setItem('list-after-query', JSON.stringify(tempList))
+            /* */
             return {
                 ...state,
                 list: [...newList]
