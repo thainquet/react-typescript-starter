@@ -15,28 +15,18 @@ import imgList from '../api'
 localStorage.setItem('imgList',JSON.stringify(imgList))
 
 
+import axios from 'axios'
+
 /* TYPES */
-const REMOVE = 'Image/REMOVE';
 const GET = 'Image/GET';
 const ADD_IMG = 'IMG/ADD';
 
 /* ACTIONS */
-export const getImage = () => {
+export const searchImg = () => {
     return (dispatch: any) => {
-        try {
-            const list = JSON.parse(localStorage.getItem('imgList'));
-            dispatch({
-                list,
-                type: GET,
-            });
-        } catch (err) {
-            dispatch({
-                list: [],
-                type: GET,
-            });
-        }
-    };
-};
+        // axios.post
+    }
+}
 
 export const showImgAvai = () => {
     return (dispatch: any) => {
@@ -57,22 +47,12 @@ export const addImg = (input: string) => {
     };
 };
 
-export const removeImg = (Image: Image) => {
-    return (dispatch: any) => {
-        dispatch({
-            url: Image,
-            type: REMOVE,
-        });
-    };
-};
-
 /* SELECTORS */
 
 /* REDUCER */
 export const ImageReducer = (
     state = initialState, action: { type: string, url: string, list: Image[], Image: Image }) => {
     let tempList: Image[];
-    let tempCompList: Image[];
     switch (action.type) {
         case ADD_IMG:
             const newImage: Image = {
@@ -89,10 +69,10 @@ export const ImageReducer = (
                 list: tempList || [],
             };
         case GET:
-            tempList = JSON.parse(localStorage.getItem('imgList'))
+            tempList = JSON.parse(localStorage.getItem('imgList'));
             return {
                 ...state,
-                list: tempList || [],
+                list: tempList
             };
         default:
             return state;

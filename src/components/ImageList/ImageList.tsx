@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addImg, getImage, showImgAvai } from '../../redux/define-action-reducer-in-redux';
+import { addImg, showImgAvai } from '../../redux/define-action-reducer-in-redux';
 import { Image } from './Image-item/ImageItem';
 
 import {
@@ -85,11 +85,10 @@ class ImageList extends React.Component<ImageListProps, ImageState> {
                     </Col>
                 </Row>
                 <ul className='Image-list'>
-                    {ImageItemsList && ImageItemsList.length ? ImageItemsList.map((item) => item && !item.id ? (
+                    {ImageItemsList && ImageItemsList.length ? ImageItemsList.map((item) => item && item.id ? (
                         <ImageItem
                             key={item.id}
                             item={item}
-                            dispatch={dispatch}
                         />
                     ) : undefined) : undefined}
                 </ul>
