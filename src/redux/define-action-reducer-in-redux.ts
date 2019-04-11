@@ -11,10 +11,6 @@ const initialState: ImageList = {
 };
 
 
-// import imgList from '../api'
-// localStorage.setItem('imgList',JSON.stringify(imgList))
-
-
 import axios from 'axios'
 import ImageList from 'src/components/ImageList/ImageList';
 
